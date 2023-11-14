@@ -4,30 +4,30 @@
 
 ### VisitDay.js
 - **🚫예외처리🚫**
-  - ❎날짜의 범위가 1에서 31 사이가 아닌 경우 에러
-  - ❎입력된 값이 숫자가 아닌 경우 에러
+  - ✅날짜의 범위가 1에서 31 사이가 아닌 경우 에러
+  - ✅입력된 값이 숫자가 아닌 경우 에러
 
-- **❎setDayOfWeek**
+- **✅setDayOfWeek**
   - 입력된 날짜의 요일을 this.#visitDayOfWeek 에 저장
 
-- **❎isWeekDay**
+- **✅isWeekDay**
   - 방문 요일이 평일인 경우, true 반환
   - 방문 요일이 주말인 경우, false 반환
 
-- **❎isWeekend**
+- **✅isWeekend**
   - 방문 요일이 주말인 경우, true 반환
   - 방문 요일이 평일인 경우, false 반환
 
-- **❎isNonChristmas**
+- **✅isNonChristmas**
   - 방문 일자가 26일 이전인 경우, true 반환
   - 방문 일자가 26일 이후인 경우, false 반환
 
-- **❎isSpecialDay**
+- **✅isSpecialDay**
   - 방문 요일이 일요일인 경우, true 반환
   - 방문 일자가 크리스마스(12월 25일)인 경우, true 반환
   - 그 외 일자인 경우 false 반환
 
-- **❎setDiscount**
+- **✅setDiscount**
   - 배열에 위 함수의 반환값을 저장한다.
   - [평일할인, 주말할인, 크리스마스 할인, 특별 할인] 순으로 저장된다.
 
@@ -108,5 +108,5 @@
   - 카테고리 배열의 0,1,2 인덱스가 전부 0 이고 주문 금액 합계가 12만원 이상인 경우 1을 반환한다.
 
 ### FindIndex.js
-- **❎findArrayIndex**
+- **✅findArrayIndex**
   - 배열에 특정 값이 있는 지 확인하고 특정 값의 인덱스를 전부 반환한다.
