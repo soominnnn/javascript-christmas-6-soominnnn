@@ -8,7 +8,7 @@ class VisitDay {
   constructor(userInput) {
     this.#visitDay = userInput;
     this.#validate(userInput);
-    setDayOfWeek();
+    this.setDayOfWeek();
   }
 
   #validate(userInput) {
