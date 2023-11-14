@@ -8,6 +8,7 @@ class Order {
   constructor(userInput) {
     this.#orderMenu = this.#stringToObject(userInput);
     this.#validate(userInput);
+    this.#validateOfMenuExists();
   }
 
   #stringToObject(userInput) {
@@ -30,6 +31,16 @@ class Order {
     }
     const MENU_NAME_ARRAY = this.getMenuObject().filter((_,index) => index % 2 === 0);
     if(MENU_NAME_ARRAY.length !== [...new Set(MENU_NAME_ARRAY)].length) {
+      throw new Error(ERROR.nonOrderError);
+    }
+  }
+
+  #validateOfMenuExists() {
+    const MENU_NAME_VALUE = this.getMenuObject().filter((_,index) => index % 2 === 0 );
+    const isMenuExists = MENU_NAME_VALUE
+    .some(menuName => Object.values(MENU).flat()
+    .some(menuItem => menuItem.name === menuName));
+    if(!isMenuExists) {
       throw new Error(ERROR.nonOrderError);
     }
   }
