@@ -41,7 +41,7 @@ class MainController {
       }
     }
   }
-  
+
   static printMenu() {
     OutputView.printMenuMessage();
     for(let i = 0; i < this.MENU.length; i+=2) {
@@ -110,6 +110,17 @@ class MainController {
       return OutputView.PrintStarBadge();
     }
     return OutputView.PrintNone();
+  }
+
+  static printResult() {
+    OutputView.printEventDay(this.userVisitDay);
+    this.printMenu();
+    OutputView.printAllPurchaseAmount(this.TOTAL_PRICE);
+    this.printFreeGift();
+    this.printAllDsicount();
+    this.printallDisCount();
+    this.printPurchaseAmount();
+    this.printBadge();
   }
 }
 
