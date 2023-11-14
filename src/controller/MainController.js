@@ -33,6 +33,10 @@ class MainController {
     while(true) {
       try {
         this.order = new Order(userOrderMenu);
+        this.MENU = this.order.getMenuObject();
+        this.CATEGORY_COUNT_ARRAY = this.order.setMenuCount();
+        this.purchaseController = new PurchaseController(this.DISCOUNT_ARRAY,this.userVisitDay,this.CATEGORY_COUNT_ARRAY);
+        this.TOTAL_PRICE = this.purchaseController.calculateTotalPrice(this.MENU);
         break;
       }
       catch(error) {
