@@ -29,4 +29,25 @@ class PurchaseController {
     }
     return 0;
   }
+
+  calculateWeekDayDiscount() {
+    if(this.#discountArray[0] === true) {
+      return this.#categoryCountArray[2] * 2023;
+    }
+    return 0;
+  }
+
+  calculateWeekendDiscount() {
+    if(this.#discountArray[1] === true) {
+      return this.#categoryCountArray[1] * 2023;
+    }
+    return 0;
+  }
+  
+  calculateSpecialDiscount() {
+    if(this.#discountArray[3] === true) {
+      return 1000;
+    }
+    return 0;
+  }
 }
