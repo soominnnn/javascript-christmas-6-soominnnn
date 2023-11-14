@@ -69,7 +69,7 @@ class VisitDay {
     if(this.#visitDayOfWeek === '일') {
       return specialDay;
     }
-    if(this.#VisitDay === '25') {
+    if(this.#visitDay === '25') {
       return specialDay;
     }
     specialDay = false;
