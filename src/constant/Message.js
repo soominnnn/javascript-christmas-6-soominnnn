@@ -12,13 +12,13 @@ const MESSAGE = {
   getOrderMenuMessage: 
   '주문하실 메뉴를 메뉴와 개수를 알려 주세요. (e.g. 해산물파스타-2,레드와인-1,초코케이크-1)\n',
   eventDayMessage:
-  '에 우테코 식당에서 받을 이벤트 혜택 미리 보기!',
+  '일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!',
   OrderMenuMessage:
-  '<주문 메뉴>',
+  '\n<주문 메뉴>',
   NonDiscountAmount:
-  '<할인 전 총 주문 금액>',
+  '\n<할인 전 총 주문 금액>',
   eventMenuMessage:
-  '<증정메뉴>\n샴페인',
+  '\n<증정메뉴>\n샴페인 1개',
   eventChristmasMessage:
   '크리스마스 디데이 할인: -',
   eventWeekDayMessage:
