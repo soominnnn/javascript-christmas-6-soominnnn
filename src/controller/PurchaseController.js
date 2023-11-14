@@ -51,6 +51,14 @@ class PurchaseController {
     return 0;
   }
 
+  setDiscount() {
+    const D_DAY_DISCOUNT = this.calculateDdayDiscount();
+    const WEEK_DAY_DISCOUNT = this.calculateWeekDayDiscount();
+    const WEEKEND_DISCOUNT = this.calculateWeekendDiscount();
+    const SPECIAL_DISCOUNT = this.calculateSpecialDiscount();
+    return [D_DAY_DISCOUNT,WEEK_DAY_DISCOUNT,WEEKEND_DISCOUNT,SPECIAL_DISCOUNT];
+  }
+
   calculateTotalDiscount() {
     const ALL_DISCOUNT_ARRAY = this.setDiscount();
     let total = 0;
