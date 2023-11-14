@@ -84,7 +84,7 @@
   - 이벤트 혜택을 전부 출력한다.
 
 ### PurchaseController.js
-- **❎calculateTotalPrice**
+- **✅calculateTotalPrice**
   - 메뉴판 오브젝트를 배열로 합친다.
   - 메뉴의 가격을 찾아 메뉴의 총 가격을 계산하고 더해서 반환한다.
 
