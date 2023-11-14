@@ -44,6 +44,15 @@ class Order {
       throw new Error(ERROR.nonOrderError);
     }
   }
+
+  #getCategory() {
+    const MENU_NAME_VALUE = this.getMenuObject().filter((_,index) => index % 2 === 0 );
+    const categories = MENU_NAME_VALUE
+    .map(menuName =>Object.keys(MENU)
+    .find(cat =>MENU[cat]
+    .some(menuItem => menuItem.name === menuName)));
+    return categories;
+  }
 }
 
 export default Order;
