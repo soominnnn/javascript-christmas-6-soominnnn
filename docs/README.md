@@ -72,15 +72,15 @@
 ## 🔺Controller
 
 ### MainContoller.js
-- **❎getUserVisitDay**
+- **✅getUserVisitDay**
   - 유저의 방문 날짜를 받아오고 예외가 발생할 경우 catch로 error를 출력한다.
   - 예외를 출력하고 재입력 받는다.
 
-- **❎getUserOrderMenu**
+- **✅getUserOrderMenu**
   - 유저의 주문 메뉴를 받아오고 예외가 발생할 경우 catch로 error를 출력한다.
   - 예외를 출력하고 재입력 받는다.
 
-- **❎printResult**
+- **✅printResult**
   - 이벤트 혜택을 전부 출력한다.
 
 ### PurchaseController.js
