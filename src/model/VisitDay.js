@@ -52,4 +52,14 @@ class VisitDay {
     weekend = false;
     return weekend;
   }
+
+  isNonChristmas() {
+    let Dday = true;
+
+    if(this.#visitDay <= 25) {
+      return Dday;
+    }
+    Dday = false;
+    return Dday;
+  }
 }
