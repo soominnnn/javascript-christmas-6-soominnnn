@@ -6,20 +6,20 @@ const OutputView = {
     Console.print(MESSAGE.startMessage);
   },
   printEventDay(day) {
-    Console.print(`12월 ${day}일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!`)
+    Console.print(`12월 ${day}${MESSAGE.eventDayMessage}`)
   },
   printMenuMessage() {
-    Console.print("\n<주문 메뉴>");
+    Console.print(MESSAGE.OrderMenuMessage);
   },
   printMenu(menu, count) {
     Console.print(`${menu} ${count}개`);
   },
   printAllPurchaseAmount(allPurchaseAmount) {
-    Console.print("\n<할인 전 총주문 금액>");
+    Console.print(MESSAGE.NonDiscountAmount);
     Console.print(`${allPurchaseAmount}원`)
   },
   printOneFreeGift() {
-    Console.print(`\n<증정 메뉴>\n샴페인 1개`);
+    Console.print(MESSAGE.eventMenuMessage);
   },
   PrintNonFreeGift() {
     Console.print(`\n<증정 메뉴>\n없음`);
