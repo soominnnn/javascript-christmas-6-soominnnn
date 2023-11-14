@@ -64,6 +64,14 @@ class Order {
     }
     return sum;
   }
+
+  setMenuCount() {
+    const APPETIZER_COUNT = this.calculateCount('appetizers');
+    const MAIN_COUNT = this.calculateCount('mainCourses'); 
+    const DESSERT_COUNT = this.calculateCount('desserts');
+    const BEVERAGE_COUNT = this.calculateCount('beverages');
+    return [APPETIZER_COUNT,MAIN_COUNT,DESSERT_COUNT,BEVERAGE_COUNT];
+  }
 }
 
 export default Order;
