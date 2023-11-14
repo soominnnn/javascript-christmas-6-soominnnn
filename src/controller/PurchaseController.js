@@ -67,4 +67,16 @@ class PurchaseController {
     }
     return total;
   }
+
+  calculateFreeGift(items) {
+    const TOTAL_PRICE = this.calculateTotalPrice(items);
+    const ONLY_BAVERAGE = this.#categoryCountArray
+    .slice(0, 3)
+    .every(element => element === 0);
+    if(TOTAL_PRICE >= 120000 && ONLY_BAVERAGE === false) {
+      return 1;
+    }
+  }
 }
+
+export default PurchaseController;
