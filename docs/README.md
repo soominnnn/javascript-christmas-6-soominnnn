@@ -88,16 +88,16 @@
   - 메뉴판 오브젝트를 배열로 합친다.
   - 메뉴의 가격을 찾아 메뉴의 총 가격을 계산하고 더해서 반환한다.
 
-- **❎calculateDdayDiscount**
+- **✅calculateDdayDiscount**
   - 크리스마스 디데이 할인이 true인 경우 디데이 할인 가격을 계산한다.
 
-- **❎calculateWeekDayDiscount**
+- **✅calculateWeekDayDiscount**
   - 평일 할인이 true인 경우 평일 할인 가격을 계산한다.
 
-- **❎calculateWeekendDiscount**
+- **✅calculateWeekendDiscount**
   - 주말 할인이 true인 경우 주말 할인 가격을 계산한다.
 
-- **❎calculateSpecialDiscount**
+- **✅calculateSpecialDiscount**
   - 특별 할인이 true인 경우 특별 할인 가격을 계산한다.
 
 - **❎setDiscount**
