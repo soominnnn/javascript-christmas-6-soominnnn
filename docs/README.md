@@ -107,7 +107,7 @@
 - **✅calculateTotalDiscount**
   - 할인 가격 전체를 저장한다.
 
-- **❎calculateFreeGift**
+- **✅calculateFreeGift**
   - 카테고리 배열의 0,1,2 인덱스가 전부 0 이고 주문 금액 합계가 12만원 이상인 경우 1을 반환한다.
 
 ### FindIndex.js
