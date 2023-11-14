@@ -8,6 +8,7 @@ class VisitDay {
   constructor(userInput) {
     this.#visitDay = userInput;
     this.#validate(userInput);
+    setDayOfWeek();
   }
 
   #validate(userInput) {
@@ -25,4 +26,19 @@ class VisitDay {
     visitDay.setDate(this.#visitDay);
     this.#visitDayOfWeek = DAY_OF_WEEK[visitDay.getDay()];
   }
+
+  isWeekDay() {
+    let weekDay = true;
+
+    if(this.#visitDayOfWeek === '금') {
+      weekDay = false;
+      return weekDay;
+    }
+    if(this.#visitDayOfWeek  === '토'){
+      weekDay = false;
+      return weekDay;
+    }
+    return weekDay;
+  }
+
 }
