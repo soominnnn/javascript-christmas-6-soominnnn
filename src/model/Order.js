@@ -12,4 +12,8 @@ class Order {
   #stringToObject(userInput) {
     return userInput.split(',').map(item => item.split('-'));
   }
+
+  getMenuObject() {
+    return this.#orderMenu.flat();
+  }
 }
