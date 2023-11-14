@@ -10,13 +10,22 @@ class Order {
     this.#validate(userInput);
     this.#validateOfMenuExists();
   }
-
   #stringToObject(userInput) {
     return userInput.split(',').map(item => item.split('-'));
   }
 
   getMenuObject() {
     return this.#orderMenu.flat();
+  }
+
+  getMenuNameValue() {
+    const MENU_NAME_VALUE = this.getMenuObject().filter((_,index) => index % 2 === 0 );
+    return MENU_NAME_VALUE;
+  }
+
+  getMenuCountValue() {
+    const MENU_COUNT_VALUE = this.getMenuObject().filter((_,index) => index % 2 !== 0 );
+    return MENU_COUNT_VALUE;
   }
 
   #validate(userInput) {
@@ -29,15 +38,13 @@ class Order {
     if(/[a-zA-Z]/.test(userInput)) {
       throw new Error(ERROR.nonOrderError);    
     }
-    const MENU_NAME_ARRAY = this.getMenuObject().filter((_,index) => index % 2 === 0);
-    if(MENU_NAME_ARRAY.length !== [...new Set(MENU_NAME_ARRAY)].length) {
+    if(this.getMenuNameValue().length !== [...new Set(this.getMenuNameValue())].length) {
       throw new Error(ERROR.nonOrderError);
     }
   }
 
   #validateOfMenuExists() {
-    const MENU_NAME_VALUE = this.getMenuObject().filter((_,index) => index % 2 === 0 );
-    const isMenuExists = MENU_NAME_VALUE
+    const isMenuExists = this.getMenuNameValue()
     .some(menuName => Object.values(MENU).flat()
     .some(menuItem => menuItem.name === menuName));
     if(!isMenuExists) {
@@ -46,8 +53,7 @@ class Order {
   }
 
   #getCategory() {
-    const MENU_NAME_VALUE = this.getMenuObject().filter((_,index) => index % 2 === 0 );
-    const categories = MENU_NAME_VALUE
+    const categories = this.getMenuNameValue()
     .map(menuName =>Object.keys(MENU)
     .find(cat =>MENU[cat]
     .some(menuItem => menuItem.name === menuName)));
@@ -56,11 +62,10 @@ class Order {
 
   calculateCount(menuCategory) {
     const MENU_CATEGORY = this.#getCategory();
-    const MENU_COUNT = this.getMenuObject().filter((_,index) => index % 2 !== 0 );
     const MAIN_MENU_INDEX = FindIndex.findArrayIndex(MENU_CATEGORY,menuCategory);
     let sum = 0;
     for(let i = 0; i < MAIN_MENU_INDEX.length; i++) {
-      sum += Number(MENU_COUNT[MAIN_MENU_INDEX[i]]);
+      sum += Number(this.getMenuCountValue()[MAIN_MENU_INDEX[i]]);
     }
     return sum;
   }
