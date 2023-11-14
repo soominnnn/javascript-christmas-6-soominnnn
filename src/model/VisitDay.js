@@ -62,4 +62,17 @@ class VisitDay {
     Dday = false;
     return Dday;
   }
+
+  isSpecialDay() {
+    let specialDay = true;
+
+    if(this.#visitDayOfWeek === '일') {
+      return specialDay;
+    }
+    if(this.#VisitDay === '25') {
+      return specialDay;
+    }
+    specialDay = false;
+    return specialDay;
+  }
 }
