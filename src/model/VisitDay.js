@@ -41,4 +41,15 @@ class VisitDay {
     return weekDay;
   }
 
+  isWeekend() {
+    let weekend = true;
+    if(this.#visitDayOfWeek === '금') {
+      return weekend;
+    }
+    if(this.#visitDayOfWeek === '토') {
+      return weekend;
+    }
+    weekend = false;
+    return weekend;
+  }
 }
