@@ -20,6 +20,20 @@ class MainController {
       }
     }
   }
+
+  static async getUserOrderMenu() {
+    let userOrderMenu = await InputView.readMenu();
+    while(true) {
+      try {
+        this.order = new Order(userOrderMenu);
+        break;
+      }
+      catch(error) {
+        Console.print(error.message);
+        userOrderMenu = await InputView.readMenu();
+      }
+    }
+  }
 }
 
 export default MainController;
