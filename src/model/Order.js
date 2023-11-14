@@ -53,6 +53,17 @@ class Order {
     .some(menuItem => menuItem.name === menuName)));
     return categories;
   }
+
+  calculateCount(menuCategory) {
+    const MENU_CATEGORY = this.#getCategory();
+    const MENU_COUNT = this.getMenuObject().filter((_,index) => index % 2 !== 0 );
+    const MAIN_MENU_INDEX = FindIndex.findArrayIndex(MENU_CATEGORY,menuCategory);
+    let sum = 0;
+    for(let i = 0; i < MAIN_MENU_INDEX.length; i++) {
+      sum += Number(MENU_COUNT[MAIN_MENU_INDEX[i]]);
+    }
+    return sum;
+  }
 }
 
 export default Order;
