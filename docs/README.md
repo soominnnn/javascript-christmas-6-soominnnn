@@ -100,7 +100,7 @@
 - **✅calculateSpecialDiscount**
   - 특별 할인이 true인 경우 특별 할인 가격을 계산한다.
 
-- **❎setDiscount**
+- **✅setDiscount**
   - 위 함수의 반환값을 배열에 저장한다.
   - [디데이 할인 가격, 평일 할인 가격, 주말 할인 가격, 특별 할인 가격] 순으로 저장된다.
 
