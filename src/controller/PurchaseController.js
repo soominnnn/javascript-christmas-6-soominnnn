@@ -22,4 +22,11 @@ class PurchaseController {
       return total;
     }, 0);
   }
+
+  calculateDdayDiscount() {
+    if( this.#discountArray[2] === true) {
+      return 1000 + 100 * (this.#visitDay-1);
+    }
+    return 0;
+  }
 }
