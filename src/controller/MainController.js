@@ -5,12 +5,6 @@ import Order from "../model/Order.js";
 import PurchaseController from "./PurchaseController.js";
 
 class MainController {
-  constructor() {
-    this.MENU = this.order.getMenuObject();
-    this.CATEGORY_COUNT_ARRAY = this.order.setMenuCount();
-    this.purchaseController = new PurchaseController(this.DISCOUNT_ARRAY,this.userVisitDay,this.CATEGORY_COUNT_ARRAY);
-    this.TOTAL_PRICE = this.purchaseController.calculateTotalPrice(this.MENU);
-  }
 
   static async getUserVisitDay() {
     OutputView.printStartMessage();
@@ -18,11 +12,11 @@ class MainController {
     while(true) {
       try {
         const visitDay = new VisitDay(this.userVisitDay);
-        this.DISCOUNT_ARRAY = (visitDay.setDiscount());
+        this.DISCOUNT_EXIST_ARRAY = visitDay.setDiscount();
         break;
       }
       catch(error) {
-        Console.print(error.message);
+        OutputView.printError(error);
         this.userVisitDay = await InputView.readDate();
       }
     }
@@ -33,20 +27,24 @@ class MainController {
     while(true) {
       try {
         this.order = new Order(userOrderMenu);
-        this.MENU = this.order.getMenuObject();
-        this.CATEGORY_COUNT_ARRAY = this.order.setMenuCount();
-        this.purchaseController = new PurchaseController(this.DISCOUNT_ARRAY,this.userVisitDay,this.CATEGORY_COUNT_ARRAY);
-        this.TOTAL_PRICE = this.purchaseController.calculateTotalPrice(this.MENU);
+        this.setOrderData();
         break;
       }
       catch(error) {
-        Console.print(error.message);
+        OutputView.printError(error);
         userOrderMenu = await InputView.readMenu();
       }
     }
   }
+  static setOrderData() {
+    this.MENU = this.order.getMenuObject();
+    this.CATEGORY_COUNT_ARRAY = this.order.setMenuCount();
+    this.purchaseController = new PurchaseController(this.DISCOUNT_EXIST_ARRAY,this.userVisitDay,this.CATEGORY_COUNT_ARRAY);
+    this.TOTAL_PRICE = this.purchaseController.calculateTotalPrice(this.MENU);
+    this.DISCOUNT_AMOUNT_ARRAY = this.purchaseController.setDiscount();
+  }
 
-  static printMenu() {
+   static printMenu() {
     OutputView.printMenuMessage();
     for(let i = 0; i < this.MENU.length; i+=2) {
       OutputView.printMenu(this.MENU[i],this.MENU[i+1]);
@@ -60,57 +58,59 @@ class MainController {
     return OutputView.PrintNonFreeGift();
   }
 
-  static printAllDsicount() {
-    const discountArray = this.purchaseController.setDiscount();
-    Console.print("\n<혜택 내역>");
-    if(this.DISCOUNT_ARRAY[2] == true) {
-      Console.print(`크리스마스 디데이 할인: -${discountArray[0]}`);
+  static printAllDiscount() {
+    OutputView.printDiscountListMessage();
+    if(this.DISCOUNT_AMOUNT_ARRAY.every(el => el === 0)){
+      return OutputView.PrintNone();
+    }
+    if(this.DISCOUNT_EXIST_ARRAY[2] == true) {
+      OutputView.PrintDdayDiscount(this.numberFormat(this.DISCOUNT_AMOUNT_ARRAY[0]));
     } 
-    if(this.DISCOUNT_ARRAY[0] == true && this.CATEGORY_COUNT_ARRAY[1] !== 0 && discountArray[1] !== 0 ) {
-      Console.print(`평일 할인: -${discountArray[1]}`);
+    if(this.DISCOUNT_EXIST_ARRAY[0] == true && this.CATEGORY_COUNT_ARRAY[1] !== 0 && this.DISCOUNT_AMOUNT_ARRAY[1] !== 0 ) {
+      OutputView.PrintWeekDayDiscount(this.numberFormat(this.DISCOUNT_AMOUNT_ARRAY[1]));
     }
-    if(this.DISCOUNT_ARRAY[1] == true && this.CATEGORY_COUNT_ARRAY[2] !== 0 && discountArray[2] !== 0) {
-      Console.print(`주말 할인: -${discountArray[2]}`);
+    if(this.DISCOUNT_EXIST_ARRAY[1] == true && this.CATEGORY_COUNT_ARRAY[2] !== 0 && this.DISCOUNT_AMOUNT_ARRAY[2] !== 0) {
+      OutputView.PrintWeekendDiscount(this.numberFormat(this.DISCOUNT_AMOUNT_ARRAY[2]));
     }
-    if(this.DISCOUNT_ARRAY[3] == true) {
-      Console.print(`특별 할인: -${discountArray[3]}`)
+    if(this.DISCOUNT_EXIST_ARRAY[3] == true) {
+      OutputView.PrintSpecialDiscount(this.numberFormat(this.DISCOUNT_AMOUNT_ARRAY[3]));
     }
     if(this.purchaseController.calculateFreeGift(this.MENU) === 1) {
-      Console.print("증정 이벤트: -25,000원");
-    }
-    if(!(this.DISCOUNT_ARRAY[0] == true && this.CATEGORY_COUNT_ARRAY[1] !== 0) && !(this.DISCOUNT_ARRAY[1] == true && this.CATEGORY_COUNT_ARRAY[2] !== 0) && this.DISCOUNT_ARRAY[2] == false && this.DISCOUNT_ARRAY[3] == false){
-      Console.print("없음");
+      OutputView.PrintFreeGiftDiscount();
     }
   }
 
   static printallDisCount() {
     const discount = this.purchaseController.calculateTotalDiscount();
-    Console.print("\n<총혜택 금액>");
-    if(discount === 0 && this.purchaseController.calculateFreeGift() === 1){
-      return Console.print(`${Number(discount) + 25000}원`);
+    this.discountWithShampaign = discount+25000;
+    OutputView.PrintAllDiscountMessage();
+    if(discount !== 0 && this.purchaseController.calculateFreeGift(this.MENU) === 1){
+      return OutputView.PrintAllDiscountAndFreeGift(this.numberFormat(this.discountWithShampaign))
     }
-    if(discount === 0) {
-      return Console.print(`${discount}원`);
+    if(discount !== 0) {
+      return OutputView.PrintAllDiscount(this.numberFormat(discount));
     }
-    return Console.print(`-${discount}원`);
+    return OutputView.PrintZeroDiscount(this.numberFormat(discount));
   }
-
+  static numberFormat(number) {
+    const formattedNumber = new Intl.NumberFormat().format(number);
+    return formattedNumber;
+  }
   static printPurchaseAmount() {
     const purchase = this.TOTAL_PRICE - this.purchaseController.calculateTotalDiscount();
-    const formattedNumber = new Intl.NumberFormat().format(purchase);
-    Console.print("\n<할인 후 예상 결제 금액>");
-    Console.print(`${formattedNumber}원`);
+    OutputView.PrintDiscountPurchaseMessage();
+    return OutputView.PrintDiscountPurchase(this.numberFormat(purchase));
   }
 
   static printBadge() {
     OutputView.PrintEventBadgeMessage();
-    if(this.purchaseController.calculateTotalDiscount() >= 20000) {
+    if(this.discountWithShampaign >= 20000) {
       return OutputView.PrintSantaBadge();
     }
-    if(this.purchaseController.calculateTotalDiscount() >= 10000) {
+    if(this.discountWithShampaign >= 10000) {
       return OutputView.PrintTreeBadge();
     }
-    if(this.purchaseController.calculateTotalDiscount() >= 5000) {
+    if(this.discountWithShampaign >= 5000) {
       return OutputView.PrintStarBadge();
     }
     return OutputView.PrintNone();
@@ -119,9 +119,9 @@ class MainController {
   static printResult() {
     OutputView.printEventDay(this.userVisitDay);
     this.printMenu();
-    OutputView.printAllPurchaseAmount(this.TOTAL_PRICE);
+    OutputView.printAllPurchaseAmount(this.numberFormat(this.TOTAL_PRICE));
     this.printFreeGift();
-    this.printAllDsicount();
+    this.printAllDiscount();
     this.printallDisCount();
     this.printPurchaseAmount();
     this.printBadge();
