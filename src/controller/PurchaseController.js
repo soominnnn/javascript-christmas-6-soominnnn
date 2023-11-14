@@ -50,4 +50,13 @@ class PurchaseController {
     }
     return 0;
   }
+
+  calculateTotalDiscount() {
+    const ALL_DISCOUNT_ARRAY = this.setDiscount();
+    let total = 0;
+    for(let index in ALL_DISCOUNT_ARRAY) {
+      total += ALL_DISCOUNT_ARRAY[index];
+    }
+    return total;
+  }
 }
