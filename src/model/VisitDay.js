@@ -18,4 +18,11 @@ class VisitDay {
       throw new Error("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
     }
   }
+
+  setDayOfWeek() {
+    const visitDay = new Date();
+    visitDay.setMonth(11);
+    visitDay.setDate(this.#visitDay);
+    this.#visitDayOfWeek = DAY_OF_WEEK[visitDay.getDay()];
+  }
 }
