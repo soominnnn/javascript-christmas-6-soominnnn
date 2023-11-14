@@ -75,4 +75,14 @@ class VisitDay {
     specialDay = false;
     return specialDay;
   }
+
+  setDiscount() {
+    const hasWeekDay = this.isWeekDay();
+    const hasWeekend = this.isWeekend();
+    const hasDdayDiscount = this.isNonChristmas();
+    const hasSpecialDiscount = this.isSpecialDay();
+    return [hasWeekDay,hasWeekend,hasDdayDiscount,hasSpecialDiscount];
+  }
 }
+
+export default VisitDay;
