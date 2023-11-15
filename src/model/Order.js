@@ -9,7 +9,10 @@ class Order {
     this.#orderMenu = this.#stringToObject(userInput);
     this.#validate(userInput);
     this.#validateOfMenuExists();
+    this.#validateOfMenuCount();
+    this.#validateOfNonMenuCount();
   }
+
   #stringToObject(userInput) {
     return userInput.split(',').map(item => item.split('-'));
   }
@@ -44,11 +47,32 @@ class Order {
   }
 
   #validateOfMenuExists() {
-    const isMenuExists = this.getMenuNameValue()
-    .some(menuName => Object.values(MENU).flat()
-    .some(menuItem => menuItem.name === menuName));
-    if(!isMenuExists) {
+    this.getMenuNameValue().forEach(item => {
+      const itemExists = Object.values(MENU).flat().some(menuItem => menuItem.name === item);
+      if (!itemExists) {
+        throw new Error(ERROR.nonOrderError);
+      }
+    });
+  }
+
+  #validateOfMenuCount() {
+    let sum = 0;
+    for(let i = 0; i < this.getMenuCountValue.length; i+=1) {
+      sum += this.getMenuCountValue();
+    }
+    if(sum >= 20) {
       throw new Error(ERROR.nonOrderError);
+    }
+  }
+  
+  #validateOfNonMenuCount() {
+    for(let key in this.getMenuCountValue()) {
+      if(this.getMenuCountValue()[key] === '0') {
+        throw new Error(ERROR.nonOrderError);
+      }
+      if(this.getMenuCountValue().length !== this.getMenuNameValue().length) {
+        throw new Error(ERROR.nonOrderError);
+      }
     }
   }
 
