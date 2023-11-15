@@ -93,41 +93,42 @@ class MainController {
   }
 
   static printallDisCount() {
-    const discount = this.purchaseController.calculateTotalDiscount();
-    const freeGift = this.purchaseController.calculateFreeGift(this.MENU);
-    this.discountWithShampaign = discount + 25000;
+    const DISCOUNT = this.purchaseController.calculateTotalDiscount();
+    const FREE_GIFT = this.purchaseController.calculateFreeGift(this.MENU);
+    this.DISCOUNT_WITH_SHAMPAIGN = DISCOUNT + 25000;
     OutputView.PrintAllDiscountMessage();
-    if (discount !== 0 && freeGift === 1) {
+    if (DISCOUNT !== 0 && FREE_GIFT === 1) {
       return OutputView.PrintAllDiscountAndFreeGift(
-        this.numberFormat(this.discountWithShampaign),
+        this.numberFormat(this.DISCOUNT_WITH_SHAMPAIGN),
       );
     }
-    if (discount !== 0) {
-      return OutputView.PrintAllDiscount(this.numberFormat(discount));
+    if (DISCOUNT !== 0) {
+      return OutputView.PrintAllDiscount(this.numberFormat(DISCOUNT));
     }
-    return OutputView.PrintZeroDiscount(this.numberFormat(discount));
+    return OutputView.PrintZeroDiscount(this.numberFormat(DISCOUNT));
   }
 
   static numberFormat(number) {
-    const formattedNumber = new Intl.NumberFormat().format(number);
-    return formattedNumber;
+    const FORMATTED_NUMBER = new Intl.NumberFormat().format(number);
+    return FORMATTED_NUMBER;
   }
 
   static printPurchaseAmount() {
-    const purchase = this.TOTAL_PRICE - this.purchaseController.calculateTotalDiscount();
+    const TOTAL_DISCOUNT = this.purchaseController.calculateTotalDiscount();
+    const PURCHASE = this.TOTAL_PRICE - TOTAL_DISCOUNT;
     OutputView.PrintDiscountPurchaseMessage();
-    return OutputView.PrintDiscountPurchase(this.numberFormat(purchase));
+    return OutputView.PrintDiscountPurchase(this.numberFormat(PURCHASE));
   }
 
   static printBadge() {
     OutputView.PrintEventBadgeMessage();
-    if(this.discountWithShampaign >= 20000) {
+    if (this.discountWithShampaign >= 20000) {
       return OutputView.PrintSantaBadge();
     }
-    if(this.discountWithShampaign >= 10000) {
+    if (this.discountWithShampaign >= 10000) {
       return OutputView.PrintTreeBadge();
     }
-    if(this.discountWithShampaign >= 5000) {
+    if (this.discountWithShampaign >= 5000) {
       return OutputView.PrintStarBadge();
     }
     return OutputView.PrintNone();
