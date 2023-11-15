@@ -1,9 +1,10 @@
-import DAY_OF_WEEK from '../constant/DayOfWeek.js';
-import CONSTANT from '../constant/constant.js';
-import ERROR from '../constant/Error.js';
+import DAY_OF_WEEK from '../constant/DayOfWeek';
+import CONSTANT from '../constant/constant';
+import ERROR from '../constant/Error';
 
 class VisitDay {
   #visitDay;
+
   #visitDayOfWeek;
 
   constructor(userInput) {
@@ -13,10 +14,10 @@ class VisitDay {
   }
 
   #validate(userInput) {
-    if(!(userInput >= CONSTANT.minDay && userInput <= CONSTANT.maxDay)) {
+    if (!(userInput >= CONSTANT.minDay && userInput <= CONSTANT.maxDay)) {
       throw new Error(ERROR.nonDayError);
     }
-    if(!Number(userInput)) {
+    if (!Number(userInput)) {
       throw new Error(ERROR.nonDayError);
     }
   }
@@ -31,11 +32,11 @@ class VisitDay {
   isWeekDay() {
     let weekDay = true;
 
-    if(this.#visitDayOfWeek === '금') {
+    if (this.#visitDayOfWeek === '금') {
       weekDay = false;
       return weekDay;
     }
-    if(this.#visitDayOfWeek  === '토'){
+    if (this.#visitDayOfWeek === '토') {
       weekDay = false;
       return weekDay;
     }
@@ -44,10 +45,10 @@ class VisitDay {
 
   isWeekend() {
     let weekend = true;
-    if(this.#visitDayOfWeek === '금') {
+    if (this.#visitDayOfWeek === '금') {
       return weekend;
     }
-    if(this.#visitDayOfWeek === '토') {
+    if (this.#visitDayOfWeek === '토') {
       return weekend;
     }
     weekend = false;
@@ -57,7 +58,7 @@ class VisitDay {
   isNonChristmas() {
     let Dday = true;
 
-    if(this.#visitDay <= 25) {
+    if (this.#visitDay <= 25) {
       return Dday;
     }
     Dday = false;
@@ -67,10 +68,10 @@ class VisitDay {
   isSpecialDay() {
     let specialDay = true;
 
-    if(this.#visitDayOfWeek === '일') {
+    if (this.#visitDayOfWeek === '일') {
       return specialDay;
     }
-    if(this.#visitDay === '25') {
+    if (this.#visitDay === '25') {
       return specialDay;
     }
     specialDay = false;
@@ -82,7 +83,7 @@ class VisitDay {
     const hasWeekend = this.isWeekend();
     const hasDdayDiscount = this.isNonChristmas();
     const hasSpecialDiscount = this.isSpecialDay();
-    return [hasWeekDay,hasWeekend,hasDdayDiscount,hasSpecialDiscount];
+    return [hasWeekDay, hasWeekend, hasDdayDiscount, hasSpecialDiscount];
   }
 }
 
