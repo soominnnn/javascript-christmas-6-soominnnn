@@ -12,6 +12,7 @@ describe('방문 날짜 클래스 테스트', () => {
   test.each([
     ['1일'],
     ['1day'],
+    ['none']
   ])('입력된 값이 숫자가 아닌 경우 예외를 발생', input => {
     const RESULT = () => new VisitDay(input);
     expect(RESULT).toThrow(ERROR.nonDayError);
