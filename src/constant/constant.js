@@ -7,6 +7,6 @@ const CONSTANT = {
   treeAmount: 10000,
   santaAmount: 20000,
   specialPattern: '/[^0-9ㄱ-ㅎㅏ-ㅣ가-힣\s,/-]/',
-}
+};
 
 export default CONSTANT;
