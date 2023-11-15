@@ -1,11 +1,10 @@
-import InputView from "../view/InputView.js";
-import OutputView from "../view/OutputView.js";
-import VisitDay from "../model/VisitDay.js";
-import Order from "../model/Order.js"; 
-import PurchaseController from "./PurchaseController.js";
+import InputView from '../view/InputView';
+import OutputView from '../view/OutputView';
+import VisitDay from '../model/VisitDay';
+import Order from '../model/Order';
+import PurchaseController from './PurchaseController';
 
 class MainController {
-
   static async getUserVisitDay() {
     OutputView.printStartMessage();
     this.userVisitDay = await InputView.readDate();
@@ -95,9 +94,10 @@ class MainController {
 
   static printallDisCount() {
     const discount = this.purchaseController.calculateTotalDiscount();
+    const freeGift = this.purchaseController.calculateFreeGift(this.MENU);
     this.discountWithShampaign = discount + 25000;
     OutputView.PrintAllDiscountMessage();
-    if (discount !== 0 && this.purchaseController.calculateFreeGift(this.MENU) === 1){
+    if (discount !== 0 && freeGift === 1) {
       return OutputView.PrintAllDiscountAndFreeGift(
         this.numberFormat(this.discountWithShampaign),
       );
