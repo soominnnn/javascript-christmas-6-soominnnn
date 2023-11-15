@@ -44,7 +44,7 @@ class MainController {
     this.DISCOUNT_AMOUNT_ARRAY = this.purchaseController.setDiscount();
   }
 
-   static printMenu() {
+  static printMenu() {
     OutputView.printMenuMessage();
     for(let i = 0; i < this.MENU.length; i+=2) {
       OutputView.printMenu(this.MENU[i],this.MENU[i+1]);
@@ -63,16 +63,16 @@ class MainController {
     if(this.DISCOUNT_AMOUNT_ARRAY.every(el => el === 0)){
       return OutputView.PrintNone();
     }
-    if(this.DISCOUNT_EXIST_ARRAY[2] == true) {
+    if(this.DISCOUNT_EXIST_ARRAY[2] === true) {
       OutputView.PrintDdayDiscount(this.numberFormat(this.DISCOUNT_AMOUNT_ARRAY[0]));
     } 
-    if(this.DISCOUNT_EXIST_ARRAY[0] == true && this.CATEGORY_COUNT_ARRAY[1] !== 0 && this.DISCOUNT_AMOUNT_ARRAY[1] !== 0 ) {
+    if(this.DISCOUNT_EXIST_ARRAY[0] === true && this.CATEGORY_COUNT_ARRAY[1] !== 0 && this.DISCOUNT_AMOUNT_ARRAY[1] !== 0 ) {
       OutputView.PrintWeekDayDiscount(this.numberFormat(this.DISCOUNT_AMOUNT_ARRAY[1]));
     }
-    if(this.DISCOUNT_EXIST_ARRAY[1] == true && this.CATEGORY_COUNT_ARRAY[2] !== 0 && this.DISCOUNT_AMOUNT_ARRAY[2] !== 0) {
+    if(this.DISCOUNT_EXIST_ARRAY[1] === true && this.CATEGORY_COUNT_ARRAY[2] !== 0 && this.DISCOUNT_AMOUNT_ARRAY[2] !== 0) {
       OutputView.PrintWeekendDiscount(this.numberFormat(this.DISCOUNT_AMOUNT_ARRAY[2]));
     }
-    if(this.DISCOUNT_EXIST_ARRAY[3] == true) {
+    if(this.DISCOUNT_EXIST_ARRAY[3] === true) {
       OutputView.PrintSpecialDiscount(this.numberFormat(this.DISCOUNT_AMOUNT_ARRAY[3]));
     }
     if(this.purchaseController.calculateFreeGift(this.MENU) === 1) {
