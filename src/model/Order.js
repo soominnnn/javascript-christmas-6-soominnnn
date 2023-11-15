@@ -32,9 +32,6 @@ class Order {
   }
 
   #validate(userInput) {
-    if(!Array.isArray(this.#orderMenu)) {
-      throw new Error(ERROR.nonOrderError);
-    }
     if(/[^0-9ㄱ-ㅎㅏ-ㅣ가-힣\s,/-]/.test(userInput)) {
       throw new Error(ERROR.nonOrderError);
     }
@@ -57,14 +54,14 @@ class Order {
 
   #validateOfMenuCount() {
     let sum = 0;
-    for(let i = 0; i < this.getMenuCountValue.length; i+=1) {
-      sum += this.getMenuCountValue();
+    for(let i = 0; i < this.getMenuCountValue().length; i+=1) {
+      sum =+ Number(this.getMenuCountValue()[i]);
     }
     if(sum >= 20) {
       throw new Error(ERROR.nonOrderError);
     }
   }
-  
+
   #validateOfNonMenuCount() {
     for(let key in this.getMenuCountValue()) {
       if(this.getMenuCountValue()[key] === '0') {
