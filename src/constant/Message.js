@@ -16,9 +16,9 @@ const MESSAGE = {
   OrderMenuMessage:
   '\n<주문 메뉴>',
   NonDiscountAmount:
-  '\n<할인 전 총 주문 금액>',
+  '\n<할인 전 총주문 금액>',
   eventMenuMessage:
-  '\n<증정메뉴>\n샴페인 1개',
+  '\n<증정 메뉴>\n샴페인 1개',
   eventChristmasMessage:
   '크리스마스 디데이 할인: -',
   eventWeekDayMessage:
