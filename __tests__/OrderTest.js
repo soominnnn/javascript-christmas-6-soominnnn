@@ -9,6 +9,7 @@ describe('메뉴 주문 클래스 테스트', () => {
     const RESULT = () => new Order(input);
     expect(RESULT).toThrow(ERROR.nonOrderError);
   });
+
   test.each([
     ['해산물파스타-0,레드와인-1'],
     ['해산물파스타-1,레드와인-0'],
@@ -16,6 +17,7 @@ describe('메뉴 주문 클래스 테스트', () => {
     const RESULT = () => new Order(input);
     expect(RESULT).toThrow(ERROR.nonOrderError);
   });
+
   test.each([
     ['해산물파스타-1,해산물파스타-1'],
     ['레드와인-1,해산물파스타-1,레드와인-1'],
@@ -23,6 +25,7 @@ describe('메뉴 주문 클래스 테스트', () => {
     const RESULT = () => new Order(input);
     expect(RESULT).toThrow(ERROR.nonOrderError);
   });
+
   test.each([
     ['해산물파스타-1.레드와인-1'],
     ['해산물파스타 1개,레드와인 1개'],
@@ -31,6 +34,7 @@ describe('메뉴 주문 클래스 테스트', () => {
     const RESULT = () => new Order(input);
     expect(RESULT).toThrow(ERROR.nonOrderError);
   });
+  
   test.each([
     ['해산물파스타-!'],
     ['레드와인-1,해산물파스타-@'],

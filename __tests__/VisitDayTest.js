@@ -9,6 +9,7 @@ describe('방문 날짜 클래스 테스트', () => {
     const RESULT = () => new VisitDay(input);
     expect(RESULT).toThrow(ERROR.nonDayError);
   });
+  
   test.each([
     ['1일'],
     ['1day'],
