@@ -1,15 +1,15 @@
 import { Console } from '@woowacourse/mission-utils';
-import MESSAGE from "../constant/Message.js";
+import MESSAGE from '../constant/Message';
 
 const InputView = {
-    async readDate() {
-        const input = await Console.readLineAsync(MESSAGE.getVisitDayMessage);
-        return input;
-    },
-    async readMenu() {
-        const input = await Console.readLineAsync(MESSAGE.getOrderMenuMessage)
-        return input;
-    }
-}
+  async readDate() {
+    const input = await Console.readLineAsync(MESSAGE.getVisitDayMessage);
+    return input;
+  },
+  async readMenu() {
+    const input = await Console.readLineAsync(MESSAGE.getOrderMenuMessage);
+    return input;
+  },
+};
 
 export default InputView;
