@@ -1,6 +1,6 @@
-import MENU from '../constant/Menu.js';
-import ERROR from '../constant/Error.js';
-import FindIndex from '../controller/FindIndex.js';
+import MENU from '../constant/Menu';
+import ERROR from '../constant/Error';
+import FindIndex from '../controller/FindIndex';
 
 class Order {
   #orderMenu;
