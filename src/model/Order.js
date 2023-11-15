@@ -11,6 +11,7 @@ class Order {
     this.#validateOfMenuExists();
     this.#validateOfMenuCount();
     this.#validateOfNonMenuCount();
+    this.#validateOfOnlyBevarage();
   }
 
   #stringToObject(userInput) {
@@ -78,6 +79,16 @@ class Order {
       if (this.getMenuCountValue()[key] === '0') {
         throw new Error(ERROR.nonOrderError);
       }
+    }
+  }
+
+  #validateOfOnlyBevarage() {
+    const orderedItems = this.getMenuNameValue().map(item => item.trim());
+    const isBeverageOrder = orderedItems.every(item =>
+      MENU.beverages.some(beverage => beverage.name === item),
+    );
+    if (isBeverageOrder) {
+      throw new Error(ERROR.nonOrderError);
     }
   }
 
