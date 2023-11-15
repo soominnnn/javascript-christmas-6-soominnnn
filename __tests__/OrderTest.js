@@ -18,7 +18,7 @@ describe('메뉴 주문 클래스 테스트', () => {
   });
   test.each([
     ['해산물파스타-1,해산물파스타-1'],
-    ['레드와인-1,해산물파스타-1,레드와인-1']
+    ['레드와인-1,해산물파스타-1,레드와인-1'],
   ])('중복 메뉴를 입력한 경우 예외를 발생', input => {
     const RESULT = () => new Order(input);
     expect(RESULT).toThrow(ERROR.nonOrderError);
@@ -42,7 +42,17 @@ describe('메뉴 주문 클래스 테스트', () => {
   test.each([
     ['RED'],
     ['gotksanfvktmxk-1'],
+    ['해산물파스타-one'],
+    ['해산물파스타-1,redWine-2']
   ])('영어가 포함될 경우 예외를 발생', input => {
+    const RESULT = () => new Order(input);
+    expect(RESULT).toThrow(ERROR.nonOrderError);
+  });
+
+  test.each([
+    ['해산물파스타-20'],
+    ['레드와인-2,해산물파스타-30'],
+  ])('메뉴의 개수가 20개 이상일 경우 예외를 발생', input => {
     const RESULT = () => new Order(input);
     expect(RESULT).toThrow(ERROR.nonOrderError);
   });
