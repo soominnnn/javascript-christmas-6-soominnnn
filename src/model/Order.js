@@ -22,30 +22,41 @@ class Order {
   }
 
   getMenuNameValue() {
-    const MENU_NAME_VALUE = this.getMenuObject().filter((_,index) => index % 2 === 0 );
+    const MENU_NAME_VALUE = this.getMenuObject().filter(
+      (_, index) => index % 2 === 0,
+    );
     return MENU_NAME_VALUE;
   }
 
   getMenuCountValue() {
-    const MENU_COUNT_VALUE = this.getMenuObject().filter((_,index) => index % 2 !== 0 );
+    const MENU_COUNT_VALUE = this.getMenuObject().filter(
+      (_, index) => index % 2 !== 0,
+    );
     return MENU_COUNT_VALUE;
   }
 
   #validate(userInput) {
-    if(/[^0-9ㄱ-ㅎㅏ-ㅣ가-힣\s,/-]/.test(userInput)) {
+    const MenuName = this.getMenuNameValue();
+    const MenuCount = this.getMenuCountValue();
+    if (/[^0-9ㄱ-ㅎㅏ-ㅣ가-힣\s,/-]/.test(userInput)) {
       throw new Error(ERROR.nonOrderError);
     }
-    if(/[a-zA-Z]/.test(userInput)) {
-      throw new Error(ERROR.nonOrderError);    
+    if (/[a-zA-Z]/.test(userInput)) {
+      throw new Error(ERROR.nonOrderError);
     }
-    if(this.getMenuNameValue().length !== [...new Set(this.getMenuNameValue())].length) {
+    if (MenuName.length !== [...new Set(MenuName)].length) {
+      throw new Error(ERROR.nonOrderError);
+    }
+    if (MenuCount.length !== MenuName.length) {
       throw new Error(ERROR.nonOrderError);
     }
   }
 
   #validateOfMenuExists() {
     this.getMenuNameValue().forEach(item => {
-      const itemExists = Object.values(MENU).flat().some(menuItem => menuItem.name === item);
+      const itemExists = Object.values(MENU)
+        .flat()
+        .some(menuItem => menuItem.name === item);
       if (!itemExists) {
         throw new Error(ERROR.nonOrderError);
       }
@@ -54,38 +65,39 @@ class Order {
 
   #validateOfMenuCount() {
     let sum = 0;
-    for(let i = 0; i < this.getMenuCountValue().length; i+=1) {
-      sum =+ Number(this.getMenuCountValue()[i]);
+    for (let i = 0; i < this.getMenuCountValue().length; i += 1) {
+      sum += Number(this.getMenuCountValue()[i]);
     }
-    if(sum >= 20) {
+    if (sum >= 20) {
       throw new Error(ERROR.nonOrderError);
     }
   }
 
   #validateOfNonMenuCount() {
-    for(let key in this.getMenuCountValue()) {
-      if(this.getMenuCountValue()[key] === '0') {
-        throw new Error(ERROR.nonOrderError);
-      }
-      if(this.getMenuCountValue().length !== this.getMenuNameValue().length) {
+    for(const key in this.getMenuCountValue()) {
+      if (this.getMenuCountValue()[key] === '0') {
         throw new Error(ERROR.nonOrderError);
       }
     }
   }
 
   #getCategory() {
-    const categories = this.getMenuNameValue()
-    .map(menuName =>Object.keys(MENU)
-    .find(cat =>MENU[cat]
-    .some(menuItem => menuItem.name === menuName)));
+    const categories = this.getMenuNameValue().map(menuName =>
+      Object.keys(MENU).find(cat =>
+        MENU[cat].some(menuItem => menuItem.name === menuName),
+      ),
+    );
     return categories;
   }
 
   calculateCount(menuCategory) {
     const MENU_CATEGORY = this.#getCategory();
-    const MAIN_MENU_INDEX = FindIndex.findArrayIndex(MENU_CATEGORY,menuCategory);
+    const MAIN_MENU_INDEX = FindIndex.findArrayIndex(
+      MENU_CATEGORY,
+      menuCategory,
+    );
     let sum = 0;
-    for(let i = 0; i < MAIN_MENU_INDEX.length; i++) {
+    for (let i = 0; i < MAIN_MENU_INDEX.length; i += 2) {
       sum += Number(this.getMenuCountValue()[MAIN_MENU_INDEX[i]]);
     }
     return sum;
@@ -93,10 +105,10 @@ class Order {
 
   setMenuCount() {
     const APPETIZER_COUNT = this.calculateCount('appetizers');
-    const MAIN_COUNT = this.calculateCount('mainCourses'); 
+    const MAIN_COUNT = this.calculateCount('mainCourses');
     const DESSERT_COUNT = this.calculateCount('desserts');
     const BEVERAGE_COUNT = this.calculateCount('beverages');
-    return [APPETIZER_COUNT,MAIN_COUNT,DESSERT_COUNT,BEVERAGE_COUNT];
+    return [APPETIZER_COUNT, MAIN_COUNT, DESSERT_COUNT, BEVERAGE_COUNT];
   }
 }
 
